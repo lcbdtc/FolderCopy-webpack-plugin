@@ -1,8 +1,11 @@
 const fs = require('fs')
 const path = require('path')
-const srcDir = '/Users/lichenbin/vueProjects/vue-demo-01'
+const srcDir = resolve('..')
 const finalDir = '/Users/lichenbin/vueProjects/demo'
 
+function resolve(dir){
+  return path.join(__dirname,'..',dir)
+}
 
 function MyPlugin(options) {
   this.options = options
@@ -31,12 +34,13 @@ function copyFile(_srcDir, _finalDir) {
       console.log(e)
     }
   })
+  console.log('success')
 }
 
 MyPlugin.prototype.apply = function (compiler) {
-  console.log('in apply');
+  // console.log('in apply');
   compiler.plugin('compilation', function (compilation) {
-    console.log('in compilation');
+    // console.log('in compilation');
     copyFile(srcDir, finalDir)
   })
 }
